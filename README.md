@@ -86,7 +86,101 @@ project                应用根目录
 + 配置
 
 ~~~
+    ## 项目 api
+    server {
+        listen       80;
+        server_name  api.prj_diy_website.com;
 
+        #charset koi8-r;
+
+        #access_log  logs/prj_diy_website_api_tp5_access.log  main;
+        access_log  logs/prj_diy_website_api_tp5_access.log;
+            root   "C:/MyWorkSpace/GitHub_Prj/prj_diy_website/php_back_end/public";
+        location / {
+            index  index.html index.htm index.php;
+           autoindex  off;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php(.*)$  {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+
+    ## 项目 后台管理
+    server {
+        listen       80;
+        server_name  admin.prj_diy_website.com;
+
+        #charset koi8-r;
+
+        #access_log  logs/prj_diy_website_admin_tp5_access.log  main;
+        access_log  logs/prj_diy_website_admin_tp5_access.log;
+            root   "C:/MyWorkSpace/GitHub_Prj/prj_diy_website/backstage";
+        location / {
+            index  index.html index.htm index.php;
+           autoindex  off;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php(.*)$  {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
 ~~~
 
 
